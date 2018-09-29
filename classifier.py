@@ -1,13 +1,15 @@
-import tensorflow as tf 
+import sys
+
+import tensorflow as tf
 import numpy as np 
 
 #Global variables
-tf.flags.DEFINE_string("image_path", "./images/image1.jpg", "Image to be classified")
+tf.flags.DEFINE_string("image_path", "images/image1.jpg", "Image to be classified")
 label_path = './retrained_labels.txt'
 model_path = './retrained_graph.pb'
 
 FLAGS = tf.flags.FLAGS
-FLAGS._parse_flags()
+FLAGS(sys.argv);
 
 image = tf.gfile.FastGFile(FLAGS.image_path, 'rb').read()
 labels = [line.rstrip() for line in tf.gfile.GFile("retrained_labels.txt")]
