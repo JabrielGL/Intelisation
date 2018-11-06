@@ -1,7 +1,8 @@
 import sys
 
 import tensorflow as tf
-import numpy as np 
+from scipy.ndimage import imread
+import numpy as np
 
 #Global variables
 tf.flags.DEFINE_string("image_path", "images/image1.jpg", "Image to be classified")
@@ -9,8 +10,9 @@ label_path = './retrained_labels.txt'
 model_path = './retrained_graph.pb'
 
 FLAGS = tf.flags.FLAGS
-FLAGS(sys.argv);
-
+FLAGS(sys.argv)     
+##imgbytes = imread(FLAGS.image_path);
+##image = imgbytes.tostring()
 image = tf.gfile.FastGFile(FLAGS.image_path, 'rb').read()
 labels = [line.rstrip() for line in tf.gfile.GFile("retrained_labels.txt")]
 
